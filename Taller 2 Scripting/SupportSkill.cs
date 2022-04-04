@@ -6,20 +6,51 @@ using System.Threading.Tasks;
 
 namespace Taller_2_Scripting
 {
-    internal class SupportSkill : Card
+    internal abstract class SupportSkill : Card
     {
-        private int baseEffectPoints;
-        public int EffectPoints
-        {
-            get => baseEffectPoints;
-            set => baseEffectPoints = value;
-        }
-        public EEffectType TargetEffect { get; private set; }
+        public virtual int EffectPoints { get; protected set; }
 
-        public SupportSkill(ERarity rarity, string name, int costPoints, int effectPoints, EEffectType targetEffect) : base(rarity, name, costPoints)
+        public SupportSkill(ERarity rarity, string name, int costPoints, int EP) : base(rarity, name, costPoints)
         {
-            EffectPoints = effectPoints;
-            TargetEffect = targetEffect;
+            EffectPoints = (int)MathF.Abs(EP);
+        }
+    }
+    internal class ReduceAP : SupportSkill
+    {
+        public ReduceAP(ERarity rarity, string name, int costPoints, int EP) : base(rarity, name, costPoints, EP)
+        {
+        }
+    }
+    internal class ReduceRP : SupportSkill
+    {
+        public ReduceRP(ERarity rarity, string name, int costPoints, int EP) : base(rarity, name, costPoints, EP)
+        {
+        }
+    }
+    internal class ReduceAll : SupportSkill
+    {
+        public ReduceAll(ERarity rarity, string name, int costPoints, int EP) : base(rarity, name, costPoints, EP)
+        {
+        }
+    }
+    internal class DestroyEquip : SupportSkill
+    {
+        //private Equip targetEquip = new Equip();
+        internal Equip TargetEquip { get; private set; }
+        public override int EffectPoints
+        {
+            get => base.EffectPoints;
+            protected set => base.EffectPoints = 0;
+        }
+        public DestroyEquip(ERarity rarity, string name, int costPoints, int EP, Equip targetEquip) : base(rarity, name, costPoints, EP)
+        {
+            TargetEquip = targetEquip;
+        }
+    }
+    internal class RestoreRP : SupportSkill
+    {
+        public RestoreRP(ERarity rarity, string name, int costPoints, int EP) : base(rarity, name, costPoints, EP)
+        {
         }
     }
 }

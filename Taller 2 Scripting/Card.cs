@@ -12,10 +12,16 @@ namespace Taller_2_Scripting
         public int CostPoints { get; protected set; }
         public ERarity Rarity { get; set; }
 
+        public Card()
+        {
+            Name = "Unused";
+            CostPoints = 0;
+            Rarity = ERarity.Common;
+        }
         public Card(ERarity rarity, string name, int costPoints)
         {
             Name = name;
-            CostPoints = costPoints;
+            CostPoints = (int)MathF.Abs(costPoints);
             Rarity = rarity;
         }
     }

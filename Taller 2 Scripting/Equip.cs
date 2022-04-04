@@ -8,20 +8,21 @@ namespace Taller_2_Scripting
 {
     internal class Equip : Card
     {
-        private int baseEffectPoints;
-        public int EffectPoints 
-        {
-            get => baseEffectPoints;
-            set => baseEffectPoints = value; 
-        }
+        public int EffectPoints { get; protected set; }
         public EAttributeType TargetAttribute { get; private set; }
-        public EAffinityEquip Affinity { get; private set; }
-
-        public Equip(ERarity rarity, string name, int costPoints, int EP, EAttributeType targetAttribute, EAffinityEquip affinity) : base(rarity, name, costPoints)
+        public EAffinity Affinity { get; private set; }
+        public Equip() : base()
         {
-            EffectPoints = EP;
+            EffectPoints = 0;
+            TargetAttribute = EAttributeType.ALL;
+            Affinity = EAffinity.All;
+        }
+        public Equip(ERarity rarity, string name, int costPoints, int EP, EAttributeType targetAttribute, EAffinity affinity) : base(rarity, name, costPoints)
+        {
+            EffectPoints = (int)MathF.Abs(EP);
             TargetAttribute = targetAttribute;
             Affinity = affinity;
         }
+
     }
 }

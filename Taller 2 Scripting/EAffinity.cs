@@ -10,12 +10,6 @@ namespace Taller_2_Scripting
     {
         Knight,
         Mage,
-        Undead
-    }
-    public enum EAffinityEquip
-    {
-        Knight,
-        Mage,
         Undead,
         All
     }
